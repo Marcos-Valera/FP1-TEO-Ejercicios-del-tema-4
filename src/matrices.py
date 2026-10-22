@@ -8,8 +8,20 @@ def es_matriz(matriz: list[list[int | float]]) -> bool:
     Devuelve:
     bool: True si todas las filas tienen el mismo número de elementos.
     """
-    # TODO: Implementa esta función
-    pass
+
+    # Si la matriz está vacía, es una matriz válida
+    if len(matriz) == 0:
+        return True
+
+    n_columnas = len(matriz[0]) # Encontramos el número de columnas de la primera fila
+
+    # Si alguna fila no tiene el mismo número de columnas, devolvemos False, sino, True
+    for fila in matriz[1:]:
+        if len(fila) != n_columnas:
+            return False
+    return True
+        
+
 
 
 def suma_matrices(
