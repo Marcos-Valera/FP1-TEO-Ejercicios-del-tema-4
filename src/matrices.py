@@ -38,8 +38,31 @@ def suma_matrices(
     list[list[int | float]] | None: Matriz resultante, o None si las matrices
     no son válidas o tienen dimensiones distintas.
     """
-    # TODO: Implementa esta función
-    pass
+    # Si no son matrices, devolvemos None
+    if not es_matriz(m1) or not es_matriz(m2):
+        return None
+
+    # Comprobamos que tengan el mismo número de filas
+    if len(m1) != len(m2):
+        return None
+
+    # Si ambas matrices están vacías, se permite la suma y el resultado es la matriz vacía
+    if len(m1) == 0:
+        return []
+
+    # Comprobamos que tengan el mismo número de columnas
+    if len(m1[0]) != len(m2[0]):
+        return None
+
+    matriz_suma = [] # Inicializamos la suma vacía
+    for fila1, fila2 in zip(m1, m2): # Cada fila, en paralelo
+        fila_suma = [] # Reiniciamos la fila suma para cada iteración
+        for celda1, celda2 in zip(fila1, fila2): # Cada celda, en paralelo
+            suma = celda1 + celda2
+            fila_suma.append(suma) # Añadimos la celda sumada a la fila
+        matriz_suma.append(fila_suma) # Añadimos la fila sumada a la matriz como nueva fila
+
+    return matriz_suma
 
 
 def suma_filas(
@@ -55,8 +78,15 @@ def suma_filas(
     list[int | float] | None: Lista con la suma de cada fila, o None si la
     matriz no es válida.
     """
-    # TODO: Implementa esta función
-    pass
+    if not es_matriz(matriz):
+        return None
+
+    fila_suma = []
+    for fila in matriz:
+        suma_fila = sum(fila)
+        fila_suma.append(suma_fila)
+
+    return fila_suma
 
 
 def suma_diagonal(matriz: list[list[int | float]]) -> int | float | None:
@@ -70,8 +100,22 @@ def suma_diagonal(matriz: list[list[int | float]]) -> int | float | None:
     int | float | None: Suma de la diagonal, o None si la matriz no es válida
     o no es cuadrada.
     """
-    # TODO: Implementa esta función
-    pass
+     # Si no es matriz, devolvemos None
+    if not es_matriz(matriz):
+        return None
+
+    # Si la matriz está vacía, la suma de la diagonal principal es 0
+    if len(matriz) == 0:
+        return 0
+
+    # Comprobamos que tenga el mismo número de filas que de columnas
+    if len(matriz) != len(matriz[0]):
+        return None
+
+    suma_diagonal = 0
+    for i in range(len(matriz)):
+        suma_diagonal += matriz[i][i]
+    return suma_diagonal
 
 
 def transponer(
@@ -87,5 +131,18 @@ def transponer(
     list[list[int | float]] | None: Matriz transpuesta, o None si la matriz
     no es válida.
     """
-    # TODO: Implementa esta función
-    pass
+
+    if not es_matriz(matriz):
+        return None
+
+    if len(matriz) == 0:
+        return []
+
+    matriz_traspuesta = []
+    for i in range(len(matriz[0])):
+        nueva_fila = []
+        for fila in matriz:
+            nueva_fila.append(fila[i])
+        matriz_traspuesta.append(nueva_fila)
+
+    return matriz_traspuesta
